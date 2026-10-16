@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — FinanzasFlex</title>
+<link rel="icon" type="image/png" href="images/icono-pestana.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ===== BARRA SUPERIOR ===== -->
+  <nav class="navbar dash-navbar sticky-top" data-bs-theme="dark">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Abrir menú">
+          <i class="bi bi-list"></i>
+        </button>
+        <a class="navbar-brand m-0" href="index.html"><img src="images/logo.png" alt="FinanzasFlex"></a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-body-secondary d-none d-sm-inline" id="saludo"></span>
+        <button class="btn btn-gold btn-sm px-3" id="btnSalir">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- ===== MENÚ LATERAL ===== -->
+      <aside class="col-lg-2 p-0">
+        <div class="offcanvas-lg offcanvas-start sidebar" tabindex="-1" id="sidebar" aria-labelledby="tituloSidebar">
+          <div class="offcanvas-header d-lg-none">
+            <h2 class="offcanvas-title h6" id="tituloSidebar">Menú</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Cerrar"></button>
+          </div>
+          <div class="offcanvas-body d-block p-3">
+            <ul class="nav flex-column gap-1">
+              <li><a href="#" class="nav-link active" data-seccion="resumen"><i class="bi bi-grid"></i> Resumen</a></li>
+              <li><a href="#" class="nav-link" data-seccion="ingresos"><i class="bi bi-cash-coin"></i> Ingresos</a></li>
+              <li><a href="#" class="nav-link" data-seccion="obligaciones"><i class="bi bi-receipt"></i> Obligaciones</a></li>
+              <li><a href="#" class="nav-link" data-seccion="distribucion"><i class="bi bi-diagram-3"></i> Distribución</a></li>
+              <li><a href="#" class="nav-link" data-seccion="reportes"><i class="bi bi-bar-chart-line"></i> Reportes</a></li>
+              <li><a href="#" class="nav-link" data-seccion="perfil"><i class="bi bi-person"></i> Perfil</a></li>
+              <li><span class="nav-link disabled"><i class="bi bi-people"></i> Finanzas compartidas <span class="badge text-bg-secondary ms-1">Pronto</span></span></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== CONTENIDO ===== -->
+      <main class="col-lg-10 p-3 p-md-4">
+
+        <!-- ---------- RESUMEN ---------- -->
+        <section id="seccion-resumen" class="seccion">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+            <h1 class="h4 mb-0">Resumen general</h1>
+            <button class="btn btn-gold btn-sm px-3" data-ir="ingresos"><i class="bi bi-plus-lg me-1"></i> Registrar ingreso</button>
+          </div>
+
+          <div class="alert alert-warning d-none align-items-center justify-content-between flex-wrap gap-2" id="avisoPendientes" role="alert">
+            <span id="textoPendientes"></span>
+            <button class="btn btn-gold btn-sm" data-ir="distribucion">Ver propuesta</button>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-6 col-xl-3"><div class="dash-card highlight"><span class="dash-label">Saldo disponible</span><strong id="cardSaldo"></strong></div></div>
+            <div class="col-6 col-xl-3"><div class="dash-card"><span class="dash-label">Ingresos del mes</span><strong id="cardIngresosMes"></strong></div></div>
+            <div class="col-6 col-xl-3"><div class="dash-card"><span class="dash-label">Pendiente en obligaciones</span><strong id="cardPendiente"></strong></div></div>
+            <div class="col-6 col-xl-3"><div class="dash-card"><span class="dash-label">Meta diaria mínima</span><strong id="cardMeta"></strong></div></div>
+          </div>
+
+          <div class="card"><div class="card-body">
+            <h2 class="h6 mb-3">Próximos vencimientos</h2>
+            <div id="listaVencimientos"></div>
+          </div></div>
+        </section>
+
+        <!-- ---------- INGRESOS (CU-03) ---------- -->
+        <section id="seccion-ingresos" class="seccion d-none">
+          <h1 class="h4 mb-4">Ingresos</h1>
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <div class="card"><div class="card-body">
+                <h2 class="h6 mb-3">Registrar ingreso</h2>
+                <form id="formIngreso" novalidate>
+                  <div class="campo mb-3">
+                    <label for="ing_monto" class="form-label">Monto (COP)</label>
+                    <input type="number" class="form-control" id="ing_monto" name="monto" min="1" step="1" inputmode="numeric" placeholder="Ej: 85000">
+                    <div class="invalid-feedback"></div>
+                  </div>
+                  <div class="campo mb-3">
+                    <label for="ing_origen" class="form-label">Origen</label>
+                    <select class="form-select" id="ing_origen" name="origen">
+                      <option value="">Selecciona un origen</option>
+                      <option value="Ventas">Ventas</option>
+                      <option value="Propinas">Propinas</option>
+                      <option value="Pago de servicios">Pago de servicios</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                    <div class="invalid-feedback"></div>
+                  </div>
+                  <div class="campo mb-3">
+                    <label for="ing_fecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="ing_fecha" name="fecha">
+                    <div class="invalid-feedback"></div>
+                  </div>
+                  <div class="campo mb-3">
+                    <label for="ing_nota" class="form-label">Nota (opcional)</label>
+                    <input type="text" class="form-control" id="ing_nota" name="nota" maxlength="80">
+                    <div class="invalid-feedback"></div>
+                  </div>
+                  <button type="submit" class="btn btn-gold w-100">Registrar ingreso</button>
+                </form>
+              </div></div>
+            </div>
+
+            <div class="col-lg-8">
+              <div class="card"><div class="card-body">
+                <h2 class="h6 mb-3">Historial de ingresos</h2>
+                <div class="table-responsive">
+                  <table class="table align-middle mb-0">
+                    <thead><tr><th>Fecha</th><th>Origen</th><th class="text-end">Monto</th><th>Estado</th><th>Nota</th><th></th></tr></thead>
+                    <tbody id="tablaIngresos"></tbody>
+                  </table>
+                </div>
+              </div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------- OBLIGACIONES (CU-02) ---------- -->
+        <section id="seccion-obligaciones" class="seccion d-none">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+            <h1 class="h4 mb-0">Obligaciones</h1>
+            <button class="btn btn-gold btn-sm px-3" id="btnNuevaObligacion"><i class="bi bi-plus-lg me-1"></i> Nueva obligación</button>
+          </div>
+          <div class="card"><div class="card-body">
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead><tr><th>Obligación</th><th class="text-end">Monto</th><th>Aportado</th><th>Vencimiento</th><th>Prioridad</th><th>Estado</th><th></th></tr></thead>
+                <tbody id="tablaObligaciones"></tbody>
+              </table>
+            </div>
+          </div></div>
+        </section>
+
+        <!-- ---------- DISTRIBUCIÓN (CU-04) ---------- -->
+        <section id="seccion-distribucion" class="seccion d-none">
+          <h1 class="h4 mb-4">Distribución inteligente</h1>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="dash-card highlight"><span class="dash-label">Meta diaria mínima</span><strong id="metaDiariaDist"></strong></div>
+            </div>
+            <div class="col-md-8">
+              <div class="card h-100"><div class="card-body">
+                <h2 class="h6 mb-3">Ingresos por distribuir</h2>
+                <div id="listaPendientes"></div>
+              </div></div>
+            </div>
+          </div>
+
+          <div class="card mb-4 d-none" id="tarjetaPropuesta"><div class="card-body">
+            <h2 class="h6 mb-3">Propuesta de distribución</h2>
+            <div id="avisoPropuesta"></div>
+            <div class="table-responsive">
+              <table class="table align-middle">
+                <thead><tr><th>Obligación</th><th>Prioridad</th><th class="text-end">Meta de hoy</th><th class="text-end">Asignado</th></tr></thead>
+                <tbody id="tablaPropuesta"></tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+              <span>Libre para gastar: <strong id="librePropuesta"></strong></span>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-secondary" id="btnCerrarPropuesta">Cerrar</button>
+                <button class="btn btn-gold" id="btnAplicarPropuesta">Aplicar distribución</button>
+              </div>
+            </div>
+          </div></div>
+
+          <div class="card"><div class="card-body">
+            <h2 class="h6 mb-3">Cómo se calcula tu meta diaria</h2>
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead><tr><th>Obligación</th><th>Prioridad</th><th class="text-end">Falta pagar</th><th class="text-end">Días</th><th class="text-end">Cuota diaria</th></tr></thead>
+                <tbody id="tablaDesglose"></tbody>
+              </table>
+            </div>
+          </div></div>
+        </section>
+
+        <!-- ---------- REPORTES (CU-06) ---------- -->
+        <section id="seccion-reportes" class="seccion d-none">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+            <h1 class="h4 mb-0">Reportes</h1>
+            <select class="form-select w-auto" id="periodoReporte" aria-label="Periodo del reporte">
+              <option value="semana">Últimos 7 días</option>
+              <option value="mes">Este mes</option>
+            </select>
+          </div>
+
+          <div class="alert alert-secondary d-none" id="reporteVacio">No hay datos suficientes en el periodo seleccionado. Registra ingresos y aplica una distribución para ver tu reporte.</div>
+
+          <div id="reporteContenido">
+            <div class="row g-3 mb-4">
+              <div class="col-6 col-xl-3"><div class="dash-card"><span class="dash-label">Ingresos del periodo</span><strong id="repIngresos"></strong></div></div>
+              <div class="col-6 col-xl-3"><div class="dash-card"><span class="dash-label">Aportado a obligaciones</span><strong id="repAportes"></strong></div></div>
+              <div class="col-6 col-xl-3"><div class="dash-card"><span class="dash-label">Ingreso comprometido</span><strong id="repPorcentaje"></strong></div></div>
+              <div class="col-6 col-xl-3"><div class="dash-card"><span class="dash-label">Obligación con más aportes</span><strong id="repMayor"></strong></div></div>
+            </div>
+            <div class="alert alert-warning d-none" id="repAlerta"></div>
+            <div class="card"><div class="card-body">
+              <h2 class="h6 mb-3">Ingresos variables vs. aportes a obligaciones</h2>
+              <div class="grafico-barras" id="graficoBarras"></div>
+              <div class="bar-legend mt-3">
+                <span><i class="dot-income"></i>Ingresos</span>
+                <span><i class="dot-expenses"></i>Aportes a obligaciones</span>
+              </div>
+            </div></div>
+          </div>
+        </section>
+
+        <!-- ---------- PERFIL ---------- -->
+        <section id="seccion-perfil" class="seccion d-none">
+          <h1 class="h4 mb-4">Perfil</h1>
+          <div class="card"><div class="card-body">
+            <dl class="row mb-0" id="datosPerfil"></dl>
+          </div></div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: NUEVA / EDITAR OBLIGACIÓN ===== -->
+  <div class="modal fade" id="modalObligacion" tabindex="-1" aria-labelledby="tituloModalObligacion" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="formObligacion" novalidate>
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="tituloModalObligacion">Nueva obligación</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="campo mb-3">
+              <label for="ob_nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="ob_nombre" name="nombre" maxlength="60" placeholder="Ej: Arriendo">
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="campo mb-3">
+              <label for="ob_monto" class="form-label">Monto (COP)</label>
+              <input type="number" class="form-control" id="ob_monto" name="monto" min="1" step="1" inputmode="numeric">
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="row g-3">
+              <div class="col-sm-6 campo">
+                <label for="ob_vencimiento" class="form-label">Fecha de vencimiento</label>
+                <input type="date" class="form-control" id="ob_vencimiento" name="vencimiento">
+                <div class="invalid-feedback"></div>
+              </div>
+              <div class="col-sm-6 campo">
+                <label for="ob_prioridad" class="form-label">Prioridad</label>
+                <select class="form-select" id="ob_prioridad" name="prioridad">
+                  <option value="">Selecciona</option>
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+                <div class="invalid-feedback"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-gold">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: CONFIRMAR ELIMINACIÓN ===== -->
+  <div class="modal fade" id="modalConfirmar" tabindex="-1" aria-labelledby="confirmarTitulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="confirmarTitulo"></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body" id="confirmarTexto"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="btnConfirmar">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AVISOS (toast) ===== -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastAviso" class="toast align-items-center border-0 text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toastTexto"></div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/utilidades.js"></script>
+  <script src="js/obligaciones.js"></script>
+  <script src="js/ingresos.js"></script>
+  <script src="js/distribucion.js"></script>
+  <script src="js/reportes.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

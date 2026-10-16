@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinanzasFlex — Inteligente</title>
+<link rel="icon" type="image/png" href="images/icono-pestana.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Bootstrap 5 e íconos (CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<!-- Nuestros estilos (siempre después de Bootstrap) -->
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand" href="#inicio">
+        <img src="images/logo.png" alt="FinanzasFlex">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menuPrincipal">
+        <ul class="navbar-nav mx-auto gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#caracteristicas">Características</a></li>
+          <li class="nav-item"><a class="nav-link" href="#modulos">Módulos</a></li>
+          <li class="nav-item"><a class="nav-link" href="registro.html">Regístrate</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+        <a href="login.html" class="btn btn-gold">Iniciar sesión</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="inicio">
+    <div class="hero-glow"></div>
+    <div class="container">
+      <h1 class="mb-3">Inteligente</h1>
+      <p class="hero-copy mx-auto mb-4">Toma el control absoluto de tus ingresos, programa distribuciones automatizadas y optimiza cada gasto con la plataforma fintech diseñada para mentes estratégicas.</p>
+      <a href="registro.html" class="btn btn-gold btn-lg px-4 mb-5">Comienza gratis</a>
+
+      <!-- Vista previa del panel -->
+      <div class="dashboard-preview mx-auto">
+        <div class="row g-3">
+          <div class="col-lg-3 d-none d-lg-block">
+            <div class="dash-item active"><span class="dot"></span> Resumen</div>
+            <div class="dash-item"><span class="dot"></span> Ingresos</div>
+            <div class="dash-item"><span class="dot"></span> Obligaciones</div>
+            <div class="dash-item"><span class="dot"></span> Distribución</div>
+            <div class="dash-item"><span class="dot"></span> Reportes</div>
+          </div>
+          <div class="col-lg-9">
+            <div class="row row-cols-2 row-cols-md-4 g-2 mb-2">
+              <div class="col"><div class="dash-card highlight"><span class="dash-label">Saldo disponible</span><strong>$ 1.250.000</strong></div></div>
+              <div class="col"><div class="dash-card"><span class="dash-label">Ingresos del mes</span><strong>$ 3.400.000</strong></div></div>
+              <div class="col"><div class="dash-card"><span class="dash-label">Pendiente</span><strong>$ 1.850.000</strong></div></div>
+              <div class="col"><div class="dash-card"><span class="dash-label">Meta diaria</span><strong>$ 62.000</strong></div></div>
+            </div>
+            <div class="row g-2">
+              <div class="col-md-4">
+                <div class="dash-panel">
+                  <span class="dash-title">Flujo de fondos</span>
+                  <div class="donut"></div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="dash-panel">
+                  <span class="dash-title">Ingresos vs. obligaciones</span>
+                  <div class="bar-chart">
+                    <div class="bar-group"><span class="bar income bar-h3"></span><span class="bar expenses bar-h1"></span></div>
+                    <div class="bar-group"><span class="bar income bar-h4"></span><span class="bar expenses bar-h2"></span></div>
+                    <div class="bar-group"><span class="bar income bar-h5"></span><span class="bar expenses bar-h2"></span></div>
+                    <div class="bar-group"><span class="bar income bar-h3"></span><span class="bar expenses bar-h3"></span></div>
+                    <div class="bar-group"><span class="bar income bar-h5"></span><span class="bar expenses bar-h1"></span></div>
+                  </div>
+                  <div class="bar-legend">
+                    <span><i class="dot-income"></i>Ingresos</span>
+                    <span><i class="dot-expenses"></i>Obligaciones</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MÓDULOS ===== -->
+  <section class="py-5" id="modulos">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="eyebrow">Nuestros módulos</span>
+        <h2>Herramientas de nivel profesional</h2>
+      </div>
+      <div class="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div class="col">
+          <div class="card card-modulo"><div class="card-body p-4">
+            <div class="icon-box"><i class="bi bi-credit-card"></i></div>
+            <h3 class="h5">Control de obligaciones</h3>
+            <p class="section-copy mb-0">Registra arriendo, servicios y deudas con fecha de vencimiento y prioridad.</p>
+          </div></div>
+        </div>
+        <div class="col">
+          <div class="card card-modulo"><div class="card-body p-4">
+            <div class="icon-box"><i class="bi bi-graph-up-arrow"></i></div>
+            <h3 class="h5">Gestión de ingresos</h3>
+            <p class="section-copy mb-0">Anota cada venta, propina o pago apenas lo recibas, clasificado por origen.</p>
+          </div></div>
+        </div>
+        <div class="col">
+          <div class="card card-modulo"><div class="card-body p-4">
+            <div class="icon-box"><i class="bi bi-diagram-3"></i></div>
+            <h3 class="h5">Distribución inteligente</h3>
+            <p class="section-copy mb-0">Calcula tu meta diaria mínima y propone cómo repartir cada ingreso según prioridades.</p>
+          </div></div>
+        </div>
+        <div class="col">
+          <div class="card card-modulo"><div class="card-body p-4">
+            <div class="icon-box"><i class="bi bi-people"></i></div>
+            <h3 class="h5">Finanzas compartidas</h3>
+            <p class="section-copy mb-0">Divide un arriendo u otro gasto entre varias personas y valida los soportes de pago.</p>
+          </div></div>
+        </div>
+        <div class="col">
+          <div class="card card-modulo"><div class="card-body p-4">
+            <div class="icon-box"><i class="bi bi-bar-chart-line"></i></div>
+            <h3 class="h5">Reportes analíticos</h3>
+            <p class="section-copy mb-0">Compara ingresos variables contra gastos fijos por semana o por mes.</p>
+          </div></div>
+        </div>
+        <div class="col">
+          <div class="card card-modulo"><div class="card-body p-4">
+            <div class="icon-box"><i class="bi bi-shield-check"></i></div>
+            <h3 class="h5">Seguridad</h3>
+            <p class="section-copy mb-0">Acceso con cuenta personal y datos protegidos para cada usuario.</p>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESO ===== -->
+  <section class="py-5 section-alt" id="caracteristicas">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="eyebrow">Proceso simplificado</span>
+      </div>
+      <div class="row g-3 row-cols-1 row-cols-md-3">
+        <div class="col"><div class="card card-modulo"><div class="card-body p-4"><span class="step-num">01</span><h3 class="h5">Registra tus obligaciones</h3><p class="section-copy mb-0">Agrega lo que debes pagar, con su fecha de vencimiento y su prioridad.</p></div></div></div>
+        <div class="col"><div class="card card-modulo"><div class="card-body p-4"><span class="step-num">02</span><h3 class="h5">Anota tus ingresos</h3><p class="section-copy mb-0">Cada ingreso activa la distribución inteligente automáticamente.</p></div></div></div>
+        <div class="col"><div class="card card-modulo"><div class="card-body p-4"><span class="step-num">03</span><h3 class="h5">Sigue tu progreso</h3><p class="section-copy mb-0">Revisa tus reportes y mira cuánto te falta para cubrir cada obligación.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIO ===== -->
+  <section class="py-5">
+    <div class="container py-4 text-center">
+      <h2 class="mb-4">Opiniones de clientes exclusivos</h2>
+      <div class="card mx-auto testimonio"><div class="card-body p-4 p-md-5">
+        <p class="fs-5 mb-4">“FinanzasFlex cambió por completo la forma en que administro el capital de mi negocio y mis fondos personales. La distribución automatizada hace todo el trabajo pesado.”</p>
+        <div class="d-flex align-items-center justify-content-center gap-3 text-start">
+          <span class="avatar">AM</span>
+          <div><strong class="d-block">Alejandro Mendoza</strong><small class="section-copy">Socio Director, Mendoza Capital</small></div>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO ===== -->
+  <section class="py-5 section-alt" id="contacto">
+    <div class="container py-4 text-center">
+      <span class="eyebrow">Contacto</span>
+      <h2>¿Necesitas ayuda?</h2>
+      <p class="section-copy mb-4">Nuestro equipo de soporte técnico (IT Support) está disponible para resolver tus dudas.</p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="mailto:soporte.it@finanzasflex.com" class="contact-item"><i class="bi bi-envelope"></i> soporte.it@finanzasflex.com</a>
+        <a href="tel:+573001234567" class="contact-item"><i class="bi bi-telephone"></i> +57 300 123 4567</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer pt-5">
+    <div class="container">
+      <div class="row g-4 pb-4">
+        <div class="col-lg-5">
+          <img src="images/logo.png" alt="FinanzasFlex" class="footer-logo">
+          <p class="mb-0">La solución financiera de nivel premium para la gestión patrimonial inteligente.</p>
+        </div>
+        <div class="col-6 col-lg-2 offset-lg-1">
+          <span class="footer-titulo">Producto</span>
+          <ul class="list-unstyled d-grid gap-2 mb-0">
+            <li><a href="#modulos">Módulos</a></li>
+            <li><a href="#caracteristicas">Características</a></li>
+            <li><a href="registro.html">Regístrate</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <span class="footer-titulo">Compañía</span>
+          <ul class="list-unstyled d-grid gap-2 mb-0">
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#">Sobre nosotros</a></li>
+            <li><a href="#">Soporte</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-2">
+          <span class="footer-titulo">Legal</span>
+          <ul class="list-unstyled d-grid gap-2 mb-0">
+            <li><a href="#">Términos y condiciones</a></li>
+            <li><a href="#">Política de privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom py-3">
+        <span>© 2026 FinanzasFlex Inc. Todos los derechos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
